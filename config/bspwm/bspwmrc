@@ -3,13 +3,27 @@
 #pgrep -x sxhkd > /dev/null || sxhkd &
 sxhkd &
 wmname LG3D &
-compton --config /home/bspwnemilio/.config/compton/compton.conf &
-feh --bg-fill /home/bspwnemilio/Imágenes/fondos/14.jpg &
-~/.config/polybar/launch.sh &
-bspc config pointer_modifier mod1
+compton --config $HOME/.config/compton/compton.conf &
+feh --bg-fill $HOME/Imágenes/fondos/wallpaper_0.jpg &
+$HOME/.config/polybar/launch.sh &
+ulauncher --no-window-shadow &
 
-bspc monitor -d    
+### reconocer el segundo monitor
+i=0
+for monitor in $(xrandr -q | grep " connected" | cut -d ' ' -f1); do
+    let i=$i+1
+done
+if [[ $i == 1 ]]; then
+  bspc monitor -d    
+else
+  bspc monitor eDP -d  
+  bspc monitor HDMI-A-0 -d  
+fi
 
+
+
+
+#
 #open Funny Java Things
 #bspc config focus_follows_pointer false
 
@@ -23,8 +37,9 @@ bspc config borderless_monocle   true
 bspc config gapless_monocle      true
 
 bspc rule -a Google-chrome desktop='^1'
-bspc rule -a code-oss desktop='^2'
-bspc rule -a Alacritty desktop='^3'
+bspc rule -a code-oss desktop='^3'
 bspc rule -a mplayer2 state=floating
 bspc rule -a Kupfer.py focus=on
 bspc rule -a Screenkey manage=off
+
+

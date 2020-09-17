@@ -120,13 +120,13 @@ super + ctrl + shift + space
 super + ctrl + {Left,Down,Up,Right}
 	bspc node -v {-20 0,0 20,0 -20,20 0}
 
+#custom move/resize
+super + alt + {Left,Down,Up,Right}
+	sh /home/bspwmemilio/.config/bspwm/scripts/bspwm_resize.sh {west,south,north,east}
 #-----------------------------------------------------------------------
 #CUSTOM
 #----------------------------------------------------------------------
 
-#custom move/resize
-super + alt + {Left,Down,Up,Right}
-	sh /home/bspwnemilio/.config/bspwm/scripts/bspwm_resize.sh {west,south,north,east}
 
 #google-chrome
 super + shift + g
@@ -136,41 +136,24 @@ super + shift + g
 super + shift + p
 	/usr/bin/flameshot gui
 
-#open proyect
+#open project
 ctrl + alt + {1-9}
-	sh /home/bspwnemilio/.config/bspwm/scripts/open_proyects.sh {1-9}
+	sh /home/bspwmemilio/.config/sxhkd/scripts/open_proyects.sh {1-9}
+
+#change polybar
+ctrl + alt + shift + {1-9}
+	sh /home/bspwmemilio/.config/sxhkd/scripts/cambiar_bar.sh {1-9}
 
 #Volume Control
-#XF86AudioRaiseVolume 
-#	amixer set Master 5%+
-#
-#XF86AudioLowerVolume 
-#	amixer set Master 5%-
-#
-#XF86AudioMute 
-#	amixer set Master toggle
-
 XF86Audio{RaiseVolume,LowerVolume,Mute}
 	amixer set Master {5%+,5%-,toggle}
 
 ##Brightness control
-#XF86MonBrightnessDown
-#	xbacklight -dec 5
-#XF86MonBrightnessUp
-#	xbacklight -inc 5
+XF86MonBrightness{Down,Up}
+	sh /home/bspwmemilio/.config/sxhkd/scripts/controlbrillo.sh {-dec 5,-inc 5}
+super + {F2,F3}
+	sh /home/bspwmemilio/.config/sxhkd/scripts/controlbrillo.sh {-dec 5,-inc 5}
 
 # media controls
-@XF86AudioPlay
-	mpc toggle
-@XF86AudioStop
-    mpc stop
-@XF86AudioNext
-    mpc next
-@XF86AudioPrev
-    mpc prev
-
-#XF86Audio{Next,Prev,Play,Stop}
-#	mpc {next,previous,play-pause,stop}
-# media control
-#XF86Audio{Next,Prev,Play,Stop}
-#    media-ctl {next,previous,play-pause,stop}
+XF86Audio{Next,Prev,Play,Stop}
+	dbus-send --type=method_call --dest=org.mpris.MediaPlayer2.chrome.instance4726 /org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player.{Next,Previous,PlayPause,Stop}
