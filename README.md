@@ -22,7 +22,8 @@ Clonar y copiar los archivos de configuracion:
 
 ```
 git clone https://github.com/mxhectorvega/bspwmarch
-sudo cp -R ~/dotfiles/* ~/.config
+
+sudo cp -R ~/bspwmarch/* ~/.config
 ```
 
 Otorgar permisos de ejecucion a los archivos:
@@ -35,21 +36,20 @@ En caso de no tener pantalla de inicio de sesion, agregar `exec bspwm` al archiv
 
 **Fuentes y temas:**
 
-San Francisco (font),
-Awesome Font 5 Free (font icons),
-Awesome Font(font icons 2),
-Materia Dark Compact (gtk),
-Papirus (icons).
-Nerd Fony (icons)
+San Francisco (font), Awesome Font 5 Free (font icons), Awesome Font(font icons 2), Materia Dark Compact (gtk), Papirus (icons).
 
 
 **Dependencias:**
 
 ```
-sudo pacman -S alacritty slock nitrogen telegram-desktop htop xarchiver neofetch leafpad ranger pcmanfm lxappearance dunst maim xclip sxiv calcurse zathura zathura-pdf-mupdf neovim mpv screenkey lxsession
+sudo pacman -S alacritty slock nitrogen firefox telegram-desktop htop xarchiver neofetch leafpad ranger pcmanfm lxappearance dunst maim xclip sxiv calcurse zathura zathura-pdf-mupdf neovim mpv screenkey lxsession
 ```
 
 ```
-yay -S picom-ibhagwan-git --noeditmenu --noconfirm --needed
+yay -S picom-ibhagwan-git spotify spotify-adblock-linux --noeditmenu --noconfirm --needed
 ```
 
+
+**Creditos:**
+
+@mxhectorvega @darch7 @bourne_again
