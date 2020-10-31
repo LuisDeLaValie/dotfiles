@@ -48,13 +48,6 @@ sudo pacman -S alacritty slock nitrogen firefox telegram-desktop htop xarchiver 
 yay -S picom-ibhagwan-git spotify spotify-adblock-linux --noeditmenu --noconfirm --needed
 ```
 
-**Grupo telegram:**
-
-https://t.me/wmesp
-
-**Canal de tips:**
-
-https://t.me/wmstips
 
 **Creditos:**
 
