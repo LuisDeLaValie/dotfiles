@@ -1,35 +1,55 @@
-# dotfiles
-dotfiles for bspwm
+## BSPwm en ArchLinux ##
 
-istalar bspwm
--------
-$ yay -s bspwm
-instalr dependecias bsqpem
-----------
-$ sudo pacman -S libxcb xcb-util xcb-util-wm xcb-util-keysyms
+Este es mi gestor de ventanas BSPwm con Lemonbar personalizados e integrados con Dmenu y un par de scripts que facilitan el uso diario, sin sacrificar el rendimiento.
 
-correr bspwm
------------
-$ mkdir -p ~/.config/{bspwm,sxhkd}
-$ cp /usr/local/share/doc/bspwm/examples/bspwmrc ~/.config/bspwm/
-$ cp /usr/local/share/doc/bspwm/examples/sxhkdrc ~/.config/sxhkd/
-$ chmod u+x ~/.config/bspwm/bspwmrc
+**Instalacion:**
 
-COstruir e instalr
---------
-$ git clone https://github.com/baskerville/bspwm.git
-$ git clone https://github.com/baskerville/sxhkd.git
-$ cd bspwm && make && sudo make install
-$ cd ../sxhkd && make && sudo make install
+Clonar e instalar los repositorios `make && sudo make install` a travez de la terminal.
 
-instalr comptom
---
-$ yay -s compton
-instalr feh
---
-$ yay -s feh
+```
+git clone https://github.com/baskerville/bspwm
+git clone https://github.com/baskerville/sxhkd
+git clone https://github.com/baskerville/xdo
+git clone https://github.com/baskerville/sutils
+git clone https://github.com/baskerville/xtitle
+git clone https://github.com/mxhectorvega/dmenu
+git clone https://github.com/mxhectorvega/st
+git clone https://github.com/krypt-n/bar
+```
+**Configuracion:**
 
-intalar  
-alacritty
-ranger
-rofi
+Clonar y copiar los archivos de configuracion:
+
+```
+git clone https://github.com/mxhectorvega/bspwmarch
+sudo cp -R ~/dotfiles/* ~/.config
+```
+
+Otorgar permisos de ejecucion a los archivos:
+
+```
+sudo chmod -R 777 ~/.config/{bspwm,lemonbar,sxhkd}
+```
+
+En caso de no tener pantalla de inicio de sesion, agregar `exec bspwm` al archivo **~/.xinitrc** (si no cuenta con el archivo, cree uno nuevo y asigne permiso de ejecucion con `chmod +x`).
+
+**Fuentes y temas:**
+
+San Francisco (font),
+Awesome Font 5 Free (font icons),
+Awesome Font(font icons 2),
+Materia Dark Compact (gtk),
+Papirus (icons).
+Nerd Fony (icons)
+
+
+**Dependencias:**
+
+```
+sudo pacman -S alacritty slock nitrogen telegram-desktop htop xarchiver neofetch leafpad ranger pcmanfm lxappearance dunst maim xclip sxiv calcurse zathura zathura-pdf-mupdf neovim mpv screenkey lxsession
+```
+
+```
+yay -S picom-ibhagwan-git --noeditmenu --noconfirm --needed
+```
+

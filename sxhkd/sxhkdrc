@@ -1,0 +1,203 @@
+                                                  
+#      @@@@@@   @@@  @@@  @@@  @@@  @@@  @@@  @@@@@@@   
+#     @@@@@@@   @@@  @@@  @@@  @@@  @@@  @@@  @@@@@@@@  
+#     !@@       @@!  !@@  @@!  @@@  @@!  !@@  @@!  @@@  
+#     !@!       !@!  @!!  !@!  @!@  !@!  @!!  !@!  @!@  
+#     !!@@!!     !@@!@!   @!@!@!@!  @!@@!@!   @!@  !@!  
+#      !!@!!!     @!!!    !!!@!!!!  !!@!!!    !@!  !!!  
+#          !:!   !: :!!   !!:  !!!  !!: :!!   !!:  !!!  
+#         !:!   :!:  !:!  :!:  !:!  :!:  !:!  :!:  !:!  
+#     :::: ::    ::  :::  ::   :::   ::  :::   :::: ::  
+#     :: : :     :   ::    :   : :   :   :::  :: :  :   
+                                                
+
+#__________________ATAJOS BASICOS______________________
+
+#Terminal/launch menu:
+super + {Return,d}
+	{xfce4-terminal,ulauncher --no-window-shadow}
+	#{st,dmenu_run}
+	
+
+#Actualizar sxhkdrc:
+alt + {Escape,r}
+	{pkill -USR1 -x sxhkd,bspc wm -r}
+
+#Cerrar apps:
+super + {q,shift + w}
+	bspc node -{c,k}
+
+#Cerrar sesion bspwm:
+super + alt + q
+	killall panel;bspc quit
+
+#_______________PROGRAMAS INSTALADOS___________________
+
+#PcmanFM ect ect ect:
+super + {e,c,n,l,i}
+	{pcmanfm,pavucontrol,st -e nvim,leafpad,st -e nmtui}
+
+#chats
+super + {w,t,shift+d}
+	{whatsapp-web,telegram-desktop,./Developer/Discord/Discord}
+
+#navegador
+super + g
+	google-chrome-stable
+
+Print
+	flameshot gui         
+
+#________________MANEJO DE VENTANAS____________________
+
+#Fijar ventana en todos los escritorios:
+super + shift + f
+	bspc node -g sticky
+
+#Rotar ventanas 90 grados / ventana flotante:
+super + {o,s}
+	{bspc node @focused:/ -R 90,bspc node focused -t \~floating}
+
+#Cursor de ventanas:
+super + {_,shift + }{Left,Down,Up,Right}
+	bspc node -{f,s} {west,south,north,east}
+
+#Fullscreen / vicecersa:
+super + f 
+	bspc node -t {fullscreen,tiled}	
+
+# alternate between the tiled and monocle layout
+super + m
+	bspc desktop -l next
+
+#Cambiar de escritorio con 2 teclas:
+super + bracket{left,right}
+	bspc desktop -f {prev,next}.local
+
+#Enviar ventanas a otra area de trabajo:
+super + {_,shift + }{1-9,0}
+	bspc {desktop -f,node -d} '^{1-9,10}'
+
+#___________________PRE-SELECCION______________________
+
+#Preseleccion para lanzar ventanas:
+super + p
+	bspc node -p "~"{west,north,east,south}
+
+#Cancelar preseleccion:
+super + shift + p
+	bspc node -p cancel
+
+#Preseleccion tamaño:
+super + ctrl + {1-9}
+	bspc node -o 0.{1-9}
+
+#___________________MOVER VENTANAS_____________________
+
+#Mover ventanas:
+super + ctrl + {Left,Down,Up,Right}
+	bspc node -v {-20 0,0 20,0 -20,20 0}
+
+#Cambiar de tamaño de ventanas:
+super + alt + {Left,Down,Up,Right}
+	bspwmventana {west,south,north,east}
+
+#Cambiar de tamaño las gaps:
+super { ,+ shift }+ z
+	bspc config window_gap $(($(bspc config window_gap) {+,-} 3))
+
+#_____________________MULTIMEDIA_______________________
+
+XF86Audio{RaiseVolume,LowerVolume,Mute}
+	amixer set Master {5%+,5%-,toggle}
+
+##Subir volumen:
+#shift + F3
+#	pactl set-sink-volume 0 +5%
+#
+##Bajar volumen:
+#shift + F2
+#	pactl set-sink-volume 0 -5%
+#
+##Silenciar volumen:
+#shift + F4
+#	pactl set-sink-mute 0 toggle
+
+##Subir brillo:
+#shift + F9
+#	xbacklight -inc 10
+#
+##Bajar brillo:
+#shift + F10
+#	xbacklight -dec 10
+
+#Prev Spotify:
+shift + F5
+    dbus-send --print-reply --dest=org.mpris.MediaPlayer2.spotify /org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player.Previous
+
+#Next Spotify:
+shift + F6
+    dbus-send --print-reply --dest=org.mpris.MediaPlayer2.spotify /org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player.Next
+
+#Play/Pause Spotify:
+shift + F7
+    dbus-send --print-reply --dest=org.mpris.MediaPlayer2.spotify /org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player.PlayPause
+
+#Stop Spotify:
+shift + F8
+    dbus-send --print-reply --dest=org.mpris.MediaPlayer2.spotify /org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player.PlayPause
+
+
+
+#______________________SCRIPTS_________________________
+
+
+#Menu de grabacion de video:
+super + Print
+	menugrabacion
+
+#Menu de apagado y recargar bspwm:
+super + BackSpace
+	menuapagado
+
+#Menu para extender o diplicar monitor:
+super + F11
+	menumonitor
+
+#Script para actualizar el sistema:
+super + F12
+	scriptactualiza
+
+# Scrtipt para revisar la bateria:
+super + F10
+	scriptbateria
+
+#____________________UTILIDADES________________________
+
+#Manual de usuario:
+alt + F1
+	setsid alacritty -e less -Srf "$HOME/.config/sxhkd/sxhkdrc"
+
+#Reporte meteorologico local:
+alt + F2
+	setsid alacritty -e less -Srf "$HOME/.config/reporteclima"
+
+#Calculadora:
+alt + F3
+	alacritty -e bc -l
+
+#Agenda y calendario:
+alt + F4
+	alacritty -e calcurse
+
+#Agenda y calendario:
+alt + F5
+	menumonitor
+
+#Screenkey ON:
+super + Scroll_Lock
+	screenkey -f dejavu
+
+#Screenkey OFF:
+super + shift + Scroll_Lock
+	killall screenkey
